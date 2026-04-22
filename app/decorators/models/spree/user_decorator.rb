@@ -10,14 +10,13 @@ module SolidusSocialStarter
 
       module ClassMethods
         def from_omniauth(auth)
-          authentication = Spree::UserSocialAuthentication.find_by(provider: auth.provider, uid: auth.uid)
+          authentication = ::Spree::UserSocialAuthentication.find_by(provider: auth.provider, uid: auth.uid)
           return authentication.user if authentication
 
           user = find_by(email: auth.info.email)
           user ||= create!(
             email: auth.info.email,
-            password: Devise.friendly_token[0, 20],
-            name: auth.info.name
+            password: Devise.friendly_token[0, 20]
           )
 
           user.user_social_authentications.create!(provider: auth.provider, uid: auth.uid)

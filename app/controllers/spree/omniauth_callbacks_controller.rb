@@ -39,6 +39,10 @@ module Spree
 
     protected
 
+    def after_sign_in_path_for(resource)
+      stored_location_for(resource) || "/"
+    end
+
     def after_omniauth_failure_path_for(_scope)
       "/login"
     end
