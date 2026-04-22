@@ -25,19 +25,22 @@ module Spree
         set_flash_message(:notice, :success, kind: auth_hash.provider.capitalize) if is_navigational_format?
       else
         session['devise.omniauth_data'] = auth_hash.except('extra')
-        redirect_to new_spree_user_registration_url
+        # Use a hardcoded path if helper is missing
+        redirect_to "/signup"
       end
     end
 
     def failure
-      set_flash_message(:error, :failure, kind: action_name.capitalize, reason: 'Invalid credentials') if is_navigational_format?
-      redirect_to spree_login_path
+      Rails.logger.error "OMNIAUTH FAILURE: #{request.env['omniauth.error.type']} - #{request.env['omniauth.error'].inspect}"
+      set_flash_message(:error, :failure, kind: action_name.capitalize, reason: request.env['omniauth.error.type'] || 'Invalid credentials') if is_navigational_format?
+      # Extremely defensive redirect
+      redirect_to "/login"
     end
 
     protected
 
     def after_omniauth_failure_path_for(_scope)
-      spree_login_path
+      "/login"
     end
   end
 end
