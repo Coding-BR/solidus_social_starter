@@ -1,0 +1,5 @@
+pt-BR:
+  devise:
+    omniauth_callbacks:
+      success: "Autenticado com sucesso com sua conta do %{kind}."
+      failure: "Não foi possível autenticar você com o %{kind} devido a \"%{reason}\"."

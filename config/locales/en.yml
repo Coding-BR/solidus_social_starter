@@ -1,5 +1,5 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: Hello world
+  devise:
+    omniauth_callbacks:
+      success: "Successfully authenticated from %{kind} account."
+      failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
