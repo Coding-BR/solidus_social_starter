@@ -7,7 +7,7 @@ module SolidusSocialStarter
   class Engine < Rails::Engine
     include SolidusSupport::EngineExtensions
 
-    isolate_namespace ::Spree
+    isolate_namespace Spree
 
     engine_name 'solidus_social_starter'
 

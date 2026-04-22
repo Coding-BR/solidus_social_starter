@@ -2,17 +2,20 @@
 
 module SolidusSocialStarter
   class Configuration
-    # Define here the settings for this extension, e.g.:
-    #
-    # attr_accessor :my_setting
+    attr_accessor :facebook_app_id, :facebook_app_secret, :google_client_id, :google_client_secret
+
+    def providers
+      {
+        facebook: { api_key: facebook_app_id, api_secret: facebook_app_secret },
+        google_oauth2: { api_key: google_client_id, api_secret: google_client_secret }
+      }
+    end
   end
 
   class << self
     def configuration
       @configuration ||= Configuration.new
     end
-
-    alias config configuration
 
     def configure
       yield configuration

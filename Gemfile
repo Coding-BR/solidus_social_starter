@@ -16,7 +16,7 @@ else
 end
 
 rails_version = ENV.fetch('RAILS_VERSION', '7.0')
-gem 'rails', "~> #{rails_version}"
+gem 'rails', (ENV['RAILS_VERSION'] && ENV['RAILS_VERSION'].start_with?('~>') ? ENV['RAILS_VERSION'] : "~> #{rails_version}")
 
 case ENV.fetch('DB', nil)
 when 'mysql'
